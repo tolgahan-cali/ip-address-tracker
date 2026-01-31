@@ -1,0 +1,195 @@
+/* 1. Global Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Rubik", sans-serif;
+}
+
+/* 2. Header Bölümü */
+header {
+  width: 100%;
+  height: 30vh;
+  min-height: 250px;
+  background-image: url("./assets/pattern-bg-desktop.png"); /* Yolunu kontrol et */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  position: relative;
+  z-index: 100;
+}
+
+.header-title {
+  color: #fff;
+  margin-bottom: 25px;
+  font-size: clamp(20px, 5vw, 32px);
+  font-weight: 500;
+}
+
+/* 3. Search Bar - Kapsayıcı ve Elemanlar */
+/* 3. Search Bar - Kapsayıcı ve Elemanlar */
+/* 3. Search Bar - Düzeltilmiş Versiyon */
+.input-container {
+  display: flex;
+  align-items: center; /* Dikeyde ortalamayı garantiye al */
+  width: 90%;
+  max-width: 800px; /* 👈 550px az gelmiş olabilir, bunu 800'e çektik, ferahlasın */
+  background-color: transparent; /* Arka planı input ve butona bıraktık */
+  margin-top: 20px; /* Başlıktan biraz ayıralım */
+}
+
+.search-bar {
+  flex-grow: 1; /* 👈 Flex: 1 yerine bunu kullan, daha agresiftir */
+  width: 100%; /* 👈 Bunu eklemezsen bazı tarayıcılar "içerik kadar" daralır */
+  height: 55px;
+  padding: 0 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 15px 0 0 15px; /* Sol tarafları yuvarla */
+  outline: none;
+  font-family: inherit;
+  cursor: text;
+}
+
+.search-btn {
+  width: 58px;
+  height: 55px;
+  background-color: #000;
+  border: none;
+  border-radius: 0 15px 15px 0; /* Sağ tarafları yuvarla */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; /* 👈 Asla küçülme! */
+}
+
+.search-btn:hover {
+  background-color: #3f3f3f;
+}
+
+/* 4. Info Bar (Beyaz Bilgi Kartı) */
+.info-bar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background-color: #fff;
+  width: 90%;
+  max-width: 1100px;
+  border-radius: 15px;
+  display: flex;
+  padding: 30px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  z-index: 101;
+}
+
+.info-item {
+  flex: 1;
+  padding: 0 20px;
+  border-right: 1px solid #e5e5e5;
+}
+
+.info-item:last-child {
+  border-right: none;
+}
+
+.info-item h6 {
+  color: hsl(0, 0%, 59%);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.info-item p {
+  color: #2c2c2c;
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 700;
+  word-break: break-all;
+}
+
+/* 5. Harita Alanı */
+#map {
+  width: 100vw;
+  height: 70vh;
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* 6. Loader (Yeni Ekledik) */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 📱 7. Responsive Ayarlar */
+@media (max-width: 768px) {
+  header {
+    height: 35vh;
+    padding-top: 25px;
+  }
+
+  .info-bar {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    gap: 15px;
+    transform: translate(-50%, 55%); /* Mobilde biraz daha aşağı çektik */
+  }
+
+  .info-item {
+    border-right: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .info-item:last-child {
+    border-bottom: none;
+  }
+
+  #map {
+    height: 65vh;
+  }
+}
